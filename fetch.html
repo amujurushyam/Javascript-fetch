@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: black;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        color: white;
+      }
+      h1 {
+        text-align: center;
+        text-transform: uppercase;
+        color: white;
+        border: 2px solid white;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: black;
+        box-shadow: 0 0 8px rgb(90, 220, 243);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mockapi integration in Ui</h1>
+    <script>
+      let main_div = document.createElement("div");
+      document.body.append(main_div);
+      main_div.style.display = "flex";
+      main_div.style.flexWrap = "wrap";
+      main_div.style.justifyContent = "center";
+      main_div.style.gap = "5px";
+      let data = fetch("https://679af5fb747b09cdccd00c8e.mockapi.io/movies");
+      data
+        .then((x) => x.json())
+        .then((x) => {
+          let res = x;
+
+          res.map((x) => {
+            let poster = document.createElement("img");
+            poster.src = x.poster;
+            poster.style.height = "250px";
+            poster.style.width = "190px";
+
+            let title = document.createElement("h2");
+            title.innerHTML = x.title;
+
+            let genre = document.createElement("h3");
+            genre.innerHTML = x.genre;
+            genre.style.backgroundColor = "black";
+
+            let director = document.createElement("h4");
+            director.innerHTML = x.director;
+            director.style.backgroundColor = "black";
+
+            let card = document.createElement("div");
+            card.append(poster, title, genre, director);
+            card.style.border = "2px solid white";
+            card.style.width = "190px";
+            card.style.padding = "10px";
+            card.style.backgroundColor = "black";
+            card.style.color = "white";
+            card.style.textAlign = "center";
+            card.style.borderRadius = "2px";
+            card.style.boxShadow = "0 0 8px  rgb(90, 220, 243)";
+            card.style.margin = "5px";
+            main_div.append(card);
+          });
+        })
+        .catch((x) => {
+          console.log(x);
+        });
+    </script>
+  </body>
+</html>
